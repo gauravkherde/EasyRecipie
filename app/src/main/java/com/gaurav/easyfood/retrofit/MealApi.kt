@@ -1,6 +1,7 @@
 package com.gaurav.easyfood.retrofit
 
 import com.gaurav.easyfood.pojo.CategoryList
+import com.gaurav.easyfood.pojo.MealByCategoryList
 import com.gaurav.easyfood.pojo.MealList
 import retrofit2.Call
 import retrofit2.http.GET
@@ -15,5 +16,8 @@ interface MealApi {
     fun getMealDetail(@Query("i")id:String):Call<MealList>
 
     @GET("filter.php?")
-    fun getPopularOption(@Query("c")categoryName:String):Call<CategoryList>
+    fun getPopularOption(@Query("c")categoryName:String):Call<MealByCategoryList>
+
+    @GET("categories.php")
+    fun getCategories(): Call<CategoryList>
 }
