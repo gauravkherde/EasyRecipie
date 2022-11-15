@@ -9,6 +9,7 @@ import com.gaurav.easyfood.pojo.Category
 
 class CategoriesAdapter():RecyclerView.Adapter<CategoriesAdapter.CategoryViewHolder>() {
     private var  categoriesList :List<Category> = ArrayList()
+    var onItemCick : ((Category) -> Unit?)? =null
 
     fun setCategoriesList(categoriesList: List<Category>){
         this.categoriesList=categoriesList
@@ -23,6 +24,9 @@ class CategoriesAdapter():RecyclerView.Adapter<CategoriesAdapter.CategoryViewHol
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         Glide.with(holder.itemView).load(categoriesList[position].strCategoryThumb).into(holder.binding.imgCategory)
         holder.binding.tvCategoryText.text=categoriesList[position].strCategory
+        holder.itemView.setOnClickListener {
+            onItemCick!!.invoke(categoriesList[position])
+        }
     }
 
     override fun getItemCount(): Int {

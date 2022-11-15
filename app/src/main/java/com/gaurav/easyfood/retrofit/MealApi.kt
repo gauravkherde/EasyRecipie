@@ -1,6 +1,7 @@
 package com.gaurav.easyfood.retrofit
 
 import com.gaurav.easyfood.pojo.CategoryList
+import com.gaurav.easyfood.pojo.MealByCategory
 import com.gaurav.easyfood.pojo.MealByCategoryList
 import com.gaurav.easyfood.pojo.MealList
 import retrofit2.Call
@@ -20,4 +21,7 @@ interface MealApi {
 
     @GET("categories.php")
     fun getCategories(): Call<CategoryList>
+
+    @GET("filter.php")
+    fun mealByCategory(@Query("c")categoryName: String):Call<MealByCategoryList>
 }
