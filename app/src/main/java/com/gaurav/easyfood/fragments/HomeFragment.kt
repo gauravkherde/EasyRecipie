@@ -16,6 +16,7 @@ import com.gaurav.easyfood.activities.MealActivity
 import com.gaurav.easyfood.adapter.CategoriesAdapter
 import com.gaurav.easyfood.adapter.MostPopularAdapter
 import com.gaurav.easyfood.databinding.FragmentHomeBinding
+import com.gaurav.easyfood.fragments.bottomsheet.MealBottomSheetFragment
 import com.gaurav.easyfood.pojo.MealByCategory
 import com.gaurav.easyfood.pojo.Meal
 import com.gaurav.easyfood.viewModels.HomeViewModel
@@ -61,9 +62,17 @@ class HomeFragment : Fragment() {
         viewModel.getCategories()
         observerPopularItems()
         onPopularItemClick()
+        onPopularItemLongClick()
         observerCategories()
         prepareCategoriesRecyclerView()
         onCategoriesClick()
+    }
+
+    private fun onPopularItemLongClick() {
+        popularItemAdapter.onLongItemClick={
+            var mealBottomSheetFragment= MealBottomSheetFragment.newInstance(it.idMeal)
+            mealBottomSheetFragment.show(childFragmentManager,"Meal Info")
+        }
     }
 
 
