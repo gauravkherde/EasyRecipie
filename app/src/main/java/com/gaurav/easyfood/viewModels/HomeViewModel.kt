@@ -4,10 +4,12 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.gaurav.easyfood.db.MealDataBase
 import com.gaurav.easyfood.pojo.*
 
 import com.gaurav.easyfood.retrofit.RetrofitInstance
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -77,5 +79,15 @@ class HomeViewModel(private var mealDataBase: MealDataBase) : ViewModel() {
             }
 
         })
+    }
+    fun deleteMeal(meal: Meal){
+        viewModelScope.launch {
+            mealDataBase.mealDao().deleteMeal(meal)
+        }
+    }
+    fun insertMeal(meal: Meal){
+        viewModelScope.launch {
+            mealDataBase.mealDao().upsertMeal(meal)
+        }
     }
 }
