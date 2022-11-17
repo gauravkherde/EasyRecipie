@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:gravity="center"
+    tools:context=".activities.SplashScreenn">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="300dp"
+        android:layout_height="250dp"
+        android:src="@mipmap/applogo"
+        />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="CookPad"
+        android:fontFamily="@font/myfont"
+        android:textAlignment="center"
+        android:textColor="@color/g_black"
+        android:textSize="50dp"
+        android:textStyle="bold|italic" />
+
+
+
+</LinearLayout>
+
+
+
