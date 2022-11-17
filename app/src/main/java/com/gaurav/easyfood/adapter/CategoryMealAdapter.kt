@@ -28,6 +28,7 @@ class CategoryMealAdapter : RecyclerView.Adapter<CategoryMealAdapter.CategoryMea
             .load(mealList[position].strMealThumb)
             .into(holder.binding.imgMeal)
          holder.binding.tvMealName.text=mealList[position].strMeal
+
     }
 
     override fun getItemCount(): Int {

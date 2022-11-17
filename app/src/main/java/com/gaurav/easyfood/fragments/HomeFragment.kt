@@ -1,5 +1,6 @@
 package com.gaurav.easyfood.fragments
 
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -17,6 +18,7 @@ import com.gaurav.easyfood.adapter.CategoriesAdapter
 import com.gaurav.easyfood.adapter.MostPopularAdapter
 import com.gaurav.easyfood.databinding.FragmentHomeBinding
 import com.gaurav.easyfood.fragments.bottomsheet.MealBottomSheetFragment
+import com.gaurav.easyfood.pojo.Category
 import com.gaurav.easyfood.pojo.MealByCategory
 import com.gaurav.easyfood.pojo.Meal
 import com.gaurav.easyfood.viewModels.HomeViewModel
@@ -28,6 +30,7 @@ class HomeFragment : Fragment() {
     private lateinit var randomMeal: Meal
     private lateinit var popularItemAdapter: MostPopularAdapter
     private lateinit var categoriesAdapter: CategoriesAdapter
+    private lateinit var progressDialog: ProgressDialog
 
     companion object {
         const val MEAL_ID = "com.gaurav.easyfood.fragments.idMeal"
@@ -54,6 +57,9 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+/*        progressDialog = ProgressDialog(requireContext())
+        progressDialog.setMessage("Please Wait")
+        progressDialog.show()*/
         preparePopularItemRecyclerView()
         viewModel.getRandomMeal()
         observerRandomMeal()
@@ -138,6 +144,7 @@ class HomeFragment : Fragment() {
     private fun observerRandomMeal() {
         viewModel.observeRandomMealLiveData().observe(viewLifecycleOwner)
         { meal ->
+          /*  progressDialog.hide()*/
             Glide.with(this@HomeFragment)
                 .load(meal!!.strMealThumb)
                 .into(binding.imgRandomMeal)
