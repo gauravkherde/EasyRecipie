@@ -1,5 +1,6 @@
 package com.gaurav.easyfood.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.gaurav.easyfood.R
 import com.gaurav.easyfood.activities.MainActivity
+import com.gaurav.easyfood.activities.MealActivity
 import com.gaurav.easyfood.adapter.FavoriteMealAdapter
 import com.gaurav.easyfood.databinding.FragmentFavoritesBinding
 import com.gaurav.easyfood.databinding.FragmentHomeBinding
@@ -39,6 +41,7 @@ class favoritesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         prepareRecycleView()
         observeFavorites()
+        onMealByCategoryClick()
         val itemTouchHelper = object :ItemTouchHelper.SimpleCallback(
             ItemTouchHelper.UP or ItemTouchHelper.DOWN,
             ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
@@ -53,17 +56,26 @@ class favoritesFragment : Fragment() {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
-            viewModel.deleteMeal(favoriteMealAdapter.differ.currentList[position])
-                Snackbar.make(requireView(),"Meal deleted",Snackbar.LENGTH_LONG).setAction(
-                    "Undo"
-                ) {
-                    viewModel.insertMeal(favoriteMealAdapter.differ.currentList[position])
+                val meal=favoriteMealAdapter.differ.currentList[position]
+            viewModel.deleteMeal(meal)
+                Snackbar.make(requireView(),"Meal deleted",Snackbar.LENGTH_LONG).setAction("Undo")
+                {
+                     viewModel.insertMeal(meal)
                 }.show()
             }
         }
         ItemTouchHelper(itemTouchHelper).attachToRecyclerView(binding.recViewFavorite)
     }
+    private fun onMealByCategoryClick() {
+        favoriteMealAdapter.onItemClick={
 
+            val intent = Intent(activity , MealActivity::class.java)
+            intent.putExtra(HomeFragment.MEAL_ID, it.idMeal)
+            intent.putExtra(HomeFragment.MEAL_NAME, it.strMeal)
+            intent.putExtra(HomeFragment.MEAL_THUMB, it.strMealThumb)
+            startActivity(intent)
+        }
+    }
     private fun prepareRecycleView() {
         favoriteMealAdapter=FavoriteMealAdapter()
         binding.recViewFavorite.apply {

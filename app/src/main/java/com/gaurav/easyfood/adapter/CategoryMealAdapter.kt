@@ -9,8 +9,9 @@ import com.gaurav.easyfood.databinding.MealItemBinding
 import com.gaurav.easyfood.pojo.MealByCategory
 import com.gaurav.easyfood.pojo.MealList
 
-class CategoryMealAdapter : RecyclerView.Adapter<CategoryMealAdapter.CategoryMealViewModel>() {
-    var mealList=ArrayList<MealByCategory>()
+class CategoryMealAdapter() : RecyclerView.Adapter<CategoryMealAdapter.CategoryMealViewModel>() {
+    private var mealList=ArrayList<MealByCategory>()
+    lateinit var onItemClick:((MealByCategory)->Unit)
 
      fun setMealList(mealList: List<MealByCategory>){
          this.mealList= mealList as ArrayList<MealByCategory>
@@ -29,6 +30,9 @@ class CategoryMealAdapter : RecyclerView.Adapter<CategoryMealAdapter.CategoryMea
             .into(holder.binding.imgMeal)
          holder.binding.tvMealName.text=mealList[position].strMeal
 
+        holder.itemView.setOnClickListener {
+            onItemClick.invoke(mealList[position])
+        }
     }
 
     override fun getItemCount(): Int {

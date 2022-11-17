@@ -1,5 +1,6 @@
 package com.gaurav.easyfood.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.Observer
@@ -9,6 +10,7 @@ import com.gaurav.easyfood.R
 import com.gaurav.easyfood.adapter.CategoryMealAdapter
 import com.gaurav.easyfood.databinding.ActivityCategoryMealsBinding
 import com.gaurav.easyfood.fragments.HomeFragment
+import com.gaurav.easyfood.pojo.MealByCategory
 import com.gaurav.easyfood.viewModels.CategoryMealViewModel
 
 class CategoryMealsActivity : AppCompatActivity() {
@@ -21,7 +23,7 @@ class CategoryMealsActivity : AppCompatActivity() {
         binding=ActivityCategoryMealsBinding.inflate(layoutInflater)
         setContentView(binding.root)
         prepareRecyclerView()
-
+        onMealByCategoryClick()
         categoryViewModel=ViewModelProvider(this)[CategoryMealViewModel::class.java]
         categoryViewModel.getMealByCategory(intent.getStringExtra(HomeFragment.CATEGORY_NAME)!!)
         categoryViewModel.observeMealsLiveData().observe(this,Observer{
@@ -34,6 +36,16 @@ class CategoryMealsActivity : AppCompatActivity() {
         binding.recViewCategoryMeal.apply {
             layoutManager=GridLayoutManager(context,2,GridLayoutManager.VERTICAL,false)
             adapter=categoryMealAdapter
+        }
+    }
+    private fun onMealByCategoryClick() {
+        categoryMealAdapter.onItemClick={
+
+            val intent = Intent(applicationContext ,MealActivity::class.java)
+            intent.putExtra(HomeFragment.MEAL_ID, it.idMeal)
+            intent.putExtra(HomeFragment.MEAL_NAME, it.strMeal)
+            intent.putExtra(HomeFragment.MEAL_THUMB, it.strMealThumb)
+            startActivity(intent)
         }
     }
 }
