@@ -21,7 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:text="Category"
-        android:textSize="@dimen/_15ssp"
+        android:textSize="@dimen/_12ssp"
         android:fontFamily="@font/myfont"
         android:textColor="@color/black"
         android:layout_marginTop="@dimen/_3sdp"/>

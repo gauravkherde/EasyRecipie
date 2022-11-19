@@ -93,7 +93,8 @@ class HomeFragment : Fragment() {
     private fun observerCategories() {
         viewModel.observeCategoriesLiveData().observe(viewLifecycleOwner, Observer
         { categories ->
-            categoriesAdapter.setCategoriesList(categories)
+                val list:List<Category> = categories.subList(1,categories.size)
+               categoriesAdapter.setCategoriesList(list)
         })
 
     }

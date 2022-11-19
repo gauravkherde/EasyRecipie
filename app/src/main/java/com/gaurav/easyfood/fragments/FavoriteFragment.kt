@@ -10,16 +10,14 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.gaurav.easyfood.R
 import com.gaurav.easyfood.activities.MainActivity
 import com.gaurav.easyfood.activities.MealActivity
 import com.gaurav.easyfood.adapter.FavoriteMealAdapter
 import com.gaurav.easyfood.databinding.FragmentFavoritesBinding
-import com.gaurav.easyfood.databinding.FragmentHomeBinding
 import com.gaurav.easyfood.viewModels.HomeViewModel
 import com.google.android.material.snackbar.Snackbar
 
-class favoritesFragment : Fragment() {
+class FavoriteFragment : Fragment() {
 
     private lateinit var binding: FragmentFavoritesBinding
     private lateinit var viewModel: HomeViewModel

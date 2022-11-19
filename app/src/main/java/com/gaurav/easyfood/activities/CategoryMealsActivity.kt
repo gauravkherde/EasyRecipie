@@ -6,11 +6,9 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import com.gaurav.easyfood.R
 import com.gaurav.easyfood.adapter.CategoryMealAdapter
 import com.gaurav.easyfood.databinding.ActivityCategoryMealsBinding
 import com.gaurav.easyfood.fragments.HomeFragment
-import com.gaurav.easyfood.pojo.MealByCategory
 import com.gaurav.easyfood.viewModels.CategoryMealViewModel
 
 class CategoryMealsActivity : AppCompatActivity() {
@@ -27,7 +25,7 @@ class CategoryMealsActivity : AppCompatActivity() {
         categoryViewModel=ViewModelProvider(this)[CategoryMealViewModel::class.java]
         categoryViewModel.getMealByCategory(intent.getStringExtra(HomeFragment.CATEGORY_NAME)!!)
         categoryViewModel.observeMealsLiveData().observe(this,Observer{
-            binding.tvCategoryCount.text=it.size.toString()
+            binding.tvCategoryCount.text="Total Meal: ${it.size}"
             categoryMealAdapter.setMealList(it)
         })
     }

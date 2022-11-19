@@ -8,14 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
-import com.gaurav.easyfood.R
 import com.gaurav.easyfood.activities.CategoryMealsActivity
 import com.gaurav.easyfood.activities.MainActivity
-import com.gaurav.easyfood.activities.MealActivity
 import com.gaurav.easyfood.adapter.CategoriesAdapter
 import com.gaurav.easyfood.databinding.FragmentCategoriesBinding
 import com.gaurav.easyfood.fragments.HomeFragment.Companion.CATEGORY_NAME
-import com.gaurav.easyfood.pojo.Category
 import com.gaurav.easyfood.viewModels.HomeViewModel
 
 

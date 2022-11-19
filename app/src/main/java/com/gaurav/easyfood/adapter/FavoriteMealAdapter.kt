@@ -5,12 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.gaurav.easyfood.databinding.MealItemBinding
 import com.gaurav.easyfood.pojo.Meal
-import com.gaurav.easyfood.pojo.MealByCategory
-
 
 class FavoriteMealAdapter: RecyclerView.Adapter<FavoriteMealAdapter.FavoriteMealAdapterViewHolder>() {
     lateinit var onItemClick:((Meal)->Unit)

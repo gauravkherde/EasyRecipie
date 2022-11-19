@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.gaurav.easyfood.R
@@ -60,18 +59,15 @@ class MealActivity : AppCompatActivity() {
 
     private  var mealToSave:Meal?=null
     private fun observeMealDetailsLiveData() {
-        mealViewModel.observeMealDetailsLiveData().observe(this, object : Observer<Meal> {
-            override fun onChanged(t: Meal?) {
-                onResponseCase()
-                val meal = t
-                mealToSave= meal
-                binding.tvCategory.text = "Category : ${meal!!.strCategory}"
-                binding.tvArea.text = "Area : ${meal!!.strArea}"
-                binding.tvInstructionDetails.text = meal.strInstructions
-                youtubeLink = meal.strYoutube!!
-            }
-
-        })
+        mealViewModel.observeMealDetailsLiveData().observe(this
+        ) { meal ->
+            onResponseCase()
+            mealToSave = meal
+            binding.tvCategory.text = "Category : ${meal!!.strCategory}"
+            binding.tvArea.text = "Cuisine : ${meal!!.strArea}"
+            binding.tvInstructionDetails.text = meal.strInstructions
+            youtubeLink = meal.strYoutube!!
+        }
     }
 
     private fun setInfoInViews() {

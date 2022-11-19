@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gaurav.easyfood.db.MealDataBase
 import com.gaurav.easyfood.pojo.*
-
 import com.gaurav.easyfood.retrofit.RetrofitInstance
 import kotlinx.coroutines.launch
 import retrofit2.Call
