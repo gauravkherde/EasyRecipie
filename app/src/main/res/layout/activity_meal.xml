@@ -97,7 +97,7 @@
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:fontFamily="@font/myfont"
-                android:text="-Instruction:"
+                android:text="Instruction:"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_15ssp"
                 android:textStyle="bold"
@@ -124,6 +124,14 @@
         android:layout_gravity="bottom|center"
         android:layout_marginBottom="@dimen/_10sdp"
         android:src="@drawable/ic_youtube" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:text="Watch it on YouTube"
+        android:textColor="@color/black"
+        android:background="@color/white"
+        android:layout_gravity="bottom|center"/>
 
     <com.google.android.material.progressindicator.LinearProgressIndicator
         android:id="@+id/progress_bar"

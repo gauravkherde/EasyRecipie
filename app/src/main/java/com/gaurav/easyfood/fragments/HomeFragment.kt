@@ -149,6 +149,7 @@ class HomeFragment : Fragment() {
             Glide.with(this@HomeFragment)
                 .load(meal!!.strMealThumb)
                 .into(binding.imgRandomMeal)
+            binding.tvRandomMealName.text=meal.strMeal
             this.randomMeal = meal
         }
     }

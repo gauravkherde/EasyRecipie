@@ -65,7 +65,10 @@ class MealActivity : AppCompatActivity() {
             mealToSave = meal
             binding.tvCategory.text = "Category : ${meal!!.strCategory}"
             binding.tvArea.text = "Cuisine : ${meal!!.strArea}"
-            binding.tvInstructionDetails.text = meal.strInstructions
+            val text1= meal.strInstructions?.replace("\r\n\r\n","\r\n")
+            val text2= text1?.replace("\r\n","\r\n\u2022 ")
+            val text3= "\u2022 $text2"
+            binding.tvInstructionDetails.text = text3
             youtubeLink = meal.strYoutube!!
         }
     }

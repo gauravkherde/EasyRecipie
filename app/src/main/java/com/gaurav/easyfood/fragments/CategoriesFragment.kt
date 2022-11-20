@@ -13,6 +13,7 @@ import com.gaurav.easyfood.activities.MainActivity
 import com.gaurav.easyfood.adapter.CategoriesAdapter
 import com.gaurav.easyfood.databinding.FragmentCategoriesBinding
 import com.gaurav.easyfood.fragments.HomeFragment.Companion.CATEGORY_NAME
+import com.gaurav.easyfood.pojo.Category
 import com.gaurav.easyfood.viewModels.HomeViewModel
 
 
@@ -54,7 +55,8 @@ class CategoriesFragment : Fragment() {
     private fun observeCategories() {
         viewModel.observeCategoriesLiveData().observe(viewLifecycleOwner, Observer
         { categories ->
-            categoryAdapter.setCategoriesList(categories)
+            val list:List<Category> = categories.subList(1,categories.size)
+            categoryAdapter.setCategoriesList(list)
         })
 
     }
