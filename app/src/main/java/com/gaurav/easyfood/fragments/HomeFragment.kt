@@ -1,12 +1,16 @@
 package com.gaurav.easyfood.fragments
 
+import android.R
+import android.app.Dialog
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.widget.ProgressBar
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,9 +23,11 @@ import com.gaurav.easyfood.adapter.MostPopularAdapter
 import com.gaurav.easyfood.databinding.FragmentHomeBinding
 import com.gaurav.easyfood.fragments.bottomsheet.MealBottomSheetFragment
 import com.gaurav.easyfood.pojo.Category
-import com.gaurav.easyfood.pojo.MealByCategory
 import com.gaurav.easyfood.pojo.Meal
+import com.gaurav.easyfood.pojo.MealByCategory
 import com.gaurav.easyfood.viewModels.HomeViewModel
+import android.os.CountDownTimer;
+import android.os.Handler
 
 
 class HomeFragment : Fragment() {
@@ -31,12 +37,13 @@ class HomeFragment : Fragment() {
     private lateinit var popularItemAdapter: MostPopularAdapter
     private lateinit var categoriesAdapter: CategoriesAdapter
     private lateinit var progressDialog: ProgressDialog
+    private lateinit var dialog: Dialog
 
     companion object {
-        const val MEAL_ID = "com.gaurav.easyfood.fragments.idMeal"
-        const val MEAL_NAME = "com.gaurav.easyfood.fragments.nameMeal"
-        const val MEAL_THUMB = "com.gaurav.easyfood.fragments.thumbMeal"
-        const val CATEGORY_NAME = "com.gaurav.easyfood.fragments.categoryName"
+        const val MEAL_ID = "MEAL_ID"
+        const val MEAL_NAME = "MEAL_NAME"
+        const val MEAL_THUMB = "MEAL_THUMB"
+        const val CATEGORY_NAME = "CATEGORY_NAME"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,9 +64,17 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-/*        progressDialog = ProgressDialog(requireContext())
-        progressDialog.setMessage("Please Wait")
+       /* progressDialog = ProgressDialog(requireContext())
+        progressDialog.setMessage("Loading")
         progressDialog.show()*/
+        dialog = Dialog(requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView( com.gaurav.easyfood.R.layout.progress_custom_dialog);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+        Handler().postDelayed(Runnable {
+            dialog.dismiss()
+        }, 1500)
         preparePopularItemRecyclerView()
         viewModel.getRandomMeal()
         observerRandomMeal()
@@ -72,6 +87,7 @@ class HomeFragment : Fragment() {
         observerCategories()
         prepareCategoriesRecyclerView()
         onCategoriesClick()
+
     }
 
     private fun onPopularItemLongClick() {
@@ -96,7 +112,6 @@ class HomeFragment : Fragment() {
                 val list:List<Category> = categories.subList(1,categories.size)
                categoriesAdapter.setCategoriesList(list)
         })
-
     }
 
     private fun onPopularItemClick() {
@@ -145,7 +160,8 @@ class HomeFragment : Fragment() {
     private fun observerRandomMeal() {
         viewModel.observeRandomMealLiveData().observe(viewLifecycleOwner)
         { meal ->
-          /*  progressDialog.hide()*/
+            /*progressDialog.hide()*/
+
             Glide.with(this@HomeFragment)
                 .load(meal!!.strMealThumb)
                 .into(binding.imgRandomMeal)
