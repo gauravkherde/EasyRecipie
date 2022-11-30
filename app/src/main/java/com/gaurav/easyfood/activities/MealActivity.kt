@@ -108,4 +108,9 @@ class MealActivity : AppCompatActivity() {
         binding.tvArea.visibility = View.VISIBLE
         binding.imgYoutube.visibility = View.VISIBLE
     }
+
+    override fun onBackPressed() {
+        val intent = Intent(this@MealActivity, MainActivity::class.java)
+        startActivity(intent)
+    }
 }

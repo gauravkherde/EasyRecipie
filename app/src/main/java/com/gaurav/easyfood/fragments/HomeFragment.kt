@@ -1,6 +1,5 @@
 package com.gaurav.easyfood.fragments
 
-import android.R
 import android.app.Dialog
 import android.app.ProgressDialog
 import android.content.Intent
@@ -10,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.ProgressBar
+import androidx.navigation.fragment.findNavController
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
@@ -28,6 +28,7 @@ import com.gaurav.easyfood.pojo.MealByCategory
 import com.gaurav.easyfood.viewModels.HomeViewModel
 import android.os.CountDownTimer;
 import android.os.Handler
+import com.gaurav.easyfood.R
 
 
 class HomeFragment : Fragment() {
@@ -69,7 +70,7 @@ class HomeFragment : Fragment() {
         progressDialog.show()*/
         dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView( com.gaurav.easyfood.R.layout.progress_custom_dialog);
+        dialog.setContentView( R.layout.progress_custom_dialog);
         dialog.setCanceledOnTouchOutside(false);
         dialog.show();
         Handler().postDelayed(Runnable {
@@ -87,6 +88,10 @@ class HomeFragment : Fragment() {
         observerCategories()
         prepareCategoriesRecyclerView()
         onCategoriesClick()
+
+        binding.imgSearch.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
+        }
 
     }
 
